@@ -14,4 +14,17 @@ class PedometerTest {
         assertEquals(101, pedometer.addStep(1,100));
     }
 
+    @Test
+    public void ShouldDaysByCriteria() {
+
+        Pedometer pedometer = new Pedometer();
+
+
+        pedometer.addStep(1,15000);
+        pedometer.addStep(2,1000);
+        pedometer.addStep(3,11000);
+
+      pedometer.printAllDaysByCriteria (data -> data > 10000 );
+    }
+
 }

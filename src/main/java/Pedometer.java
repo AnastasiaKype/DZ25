@@ -1,9 +1,18 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Predicate;
 
 public class Pedometer implements Comparable <Pedometer>{
 
     private Map<Integer,Integer> data = new HashMap<>();
+
+    public void printAllDaysByCriteria(Predicate<Integer> predicate) {
+        for (int day : data.keySet()) {
+            if (predicate.test(data.get(day))) {
+                System.out.println("день " + day + " шагов " + data.get(day));
+            }
+        }
+    }
 
 
     public int addStep(int day, int step) {
