@@ -2,9 +2,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-public class Pedometer implements Comparable <Pedometer>{
+public class Pedometer implements Comparable<Pedometer> {
 
-    private Map<Integer,Integer> data = new HashMap<>();
+    private Map<Integer, Integer> data = new HashMap<>();
 
     public void printAllDaysByCriteria(Predicate<Integer> predicate) {
         for (int day : data.keySet()) {
@@ -17,11 +17,19 @@ public class Pedometer implements Comparable <Pedometer>{
 
     public int addStep(int day, int step) {
 
+        if (day < 1 || day > 365) {
+            throw new IllegalDayException(day);
+        }
         if (data.containsKey(day)) {
-            data.put(day, data.get(day) + step);
+            if (step >= 0) {
+                data.put(day, data.get(day) + step);
+            } else {
+                data.put(day, step);
+            }
         } else {
-            data.put(day, step);
-        } return stepsToOvercomeTheMaximum(day);
+            throw new IllegalStepsException(step);
+        }
+        return stepsToOvercomeTheMaximum(day);
     }
 
 
@@ -32,31 +40,34 @@ public class Pedometer implements Comparable <Pedometer>{
             if (value > max) {
                 max = value;
             }
-        } return max;
+        }
+        return max;
     }
 
-    public int sum(){
+    public int sum() {
         int sum = 0;
         for (int step : data.keySet()) {
             sum += data.get(step);
-        } return sum;
+        }
+        return sum;
     }
 
 
     public int stepsToOvercomeTheMaximum(int day) {
         int maxSumStep = maxSteps();
-        int stepsInDay = data.getOrDefault(day,0);
+        int stepsInDay = data.getOrDefault(day, 0);
         return maxSumStep - stepsInDay + 1;
 
     }
 
-    public int minCntSteps (int minSteps){
+    public int minCntSteps(int minSteps) {
         int min = 0;
         for (int value : data.values()) {
             if (value > minSteps) {
-               min++;
+                min++;
             }
-        } return min;
+        }
+        return min;
     }
 
     public int compareTo(Pedometer pedometer) {

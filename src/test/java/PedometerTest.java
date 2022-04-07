@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 class PedometerTest {
@@ -25,6 +26,29 @@ class PedometerTest {
         pedometer.addStep(3,11000);
 
       pedometer.printAllDaysByCriteria (data -> data > 10000 );
+    }
+
+    @Test
+    public void IllegalExceptionStepTest() {
+        Pedometer pedometer = new Pedometer();
+
+        Assertions.assertThrows(IllegalStepsException.class, () -> {
+            pedometer.addStep(1, -100);
+        });
+    }
+
+    @Test
+    public void IllegalExceptionDaysTest(){
+        Pedometer pedometer = new Pedometer();
+
+        Assertions.assertThrows(IllegalDayException.class,() -> {
+            pedometer.addStep(-5,0);
+        });
+        Assertions.assertThrows(IllegalDayException.class,() -> {
+            pedometer.addStep(366,-59);
+        });
+
+
     }
 
 }
