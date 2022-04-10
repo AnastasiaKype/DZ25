@@ -35,6 +35,7 @@ class PedometerTest {
         Assertions.assertThrows(IllegalStepsException.class, () -> {
             pedometer.addStep(1, -100);
         });
+
     }
 
     @Test
@@ -47,7 +48,6 @@ class PedometerTest {
         Assertions.assertThrows(IllegalDayException.class,() -> {
             pedometer.addStep(366,-59);
         });
-
 
     }
 
