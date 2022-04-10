@@ -28,7 +28,7 @@ public class Pedometer implements Comparable <Pedometer>{
 
     public int sum(){
         int sum = 0;
-        for (int step : data.keySet()) {
+        for (int step : data.values()) {
             sum += data.get(step);
         } return sum;
     }
