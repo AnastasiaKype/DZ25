@@ -19,14 +19,12 @@ public class Pedometer implements Comparable<Pedometer> {
 
         if (day < 1 || day > 365) {
             throw new IllegalDayException(day);
-        } else if (data.containsKey(day)) {
-            if (step >= 0) {
-                data.put(day, data.get(day) + step);
-            } else {
-                data.put(day, step);
-            }
-        } else {
+        } else if (step < 0) {
             throw new IllegalStepsException(step);
+        } else if (data.containsKey(day)) {
+            data.put(day, data.get(day) + step);
+        } else {
+            data.put(day, step);
         }
         return stepsToOvercomeTheMaximum(day);
     }

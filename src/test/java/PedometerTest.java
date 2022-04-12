@@ -33,7 +33,7 @@ class PedometerTest {
         Pedometer pedometer = new Pedometer();
 
         Assertions.assertThrows(IllegalStepsException.class, () -> {
-            pedometer.addStep(1, -100);
+            pedometer.addStep(28, -58);
         });
 
     }
